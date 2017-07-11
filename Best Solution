@@ -1,0 +1,44 @@
+void swapNodes(Node* &head, int x, int y)
+{
+    if(!head)
+    return;
+    
+    Node* currX = head;
+    Node* currY = head;
+    Node* prevX = NULL;
+    Node* prevY = NULL;
+    
+    while(currX && currY && (currX -> data != x || currY -> data != y))
+    {
+        if(currX -> data != x)
+        {
+            prevX = currX;
+            currX = currX -> next;
+        }
+        
+        if(currY -> data != y)
+        {
+            prevY = currY;
+            currY = currY -> next;
+        }
+    }
+    
+    if(!currX || !currY || currX -> data != x || currY -> data != y)
+    return;
+    
+    if(!prevX)
+    head = currY;
+    else
+    prevX -> next = currY;
+    
+    if(!prevY)
+    head = currX;
+    else
+    prevY -> next = currX;
+    
+    Node* next = currY -> next;
+    currY -> next = currX -> next;
+    currX -> next = next;
+    
+    return;
+}
